@@ -1,17 +1,20 @@
 'use strict'
-let YT_API_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=beatles&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8'
-let WIKI_API_URL = 'https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=beatles&format=json'
+
 
 function onInit() {
-    getYouTubeData(YT_API_URL)
+    saveToStorage('testKey', { hello: 'world' });
+    console.log(localStorage.getItem('testKey'));
+    getYouTubeData('Beatles')
         .then(videos => renderYoutube(videos))
         .catch(error => {
             console.error('Error fetching data:', error)
             throw error
         })
 
-    getWikiData(WIKI_API_URL)
-        .then(results => renderWikiResults(results))
+    getWikiData('Beatles')
+        .then(results => {
+            renderWikiResults(results)
+        })
         .catch(error => {
             console.error('Error fetching data:', error)
             throw error
@@ -21,7 +24,6 @@ function onInit() {
 
 function renderYoutube(res) {
     let strHTML = ''
-    console.log(res)
     const elYoutubeContainer = document.querySelector('.top-five-yt-results-container')
     res.forEach(video => {
         strHTML += `
@@ -36,10 +38,8 @@ function renderYoutube(res) {
 
 function renderWikiResults(res) {
     let strHTML = ''
-    const results = res.query.search
-    console.log(results)
     const elWikiContainer = document.querySelector('.wiki-container')
-    results.forEach(result => {
+    res.forEach(result => {
         strHTML += `
         <div class="wiki-result">
             <p class="result-title">${result.title}</p>
@@ -56,16 +56,16 @@ function onRenderYoutubePlayer(urlId) {
 
 function onSearch(ev) {
     const srchTxt = ev.target.value
-    YT_API_URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${srchTxt}&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8`
-    WIKI_API_URL = `https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=${srchTxt}&format=json`
-    if(srchTxt === '' ||srchTxt === undefined) return
-    getYouTubeData(YT_API_URL)
+
+    if (srchTxt === '' || srchTxt === undefined) return
+
+    getYouTubeData(srchTxt)
         .then(videos => renderYoutube(videos))
         .catch(error => {
             console.error('Error fetching data:', error)
             throw error
         })
-    getWikiData(WIKI_API_URL)
+    getWikiData(srchTxt)
         .then(results => renderWikiResults(results))
         .catch(error => {
             console.error('Error fetching data:', error)
