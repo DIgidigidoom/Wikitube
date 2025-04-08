@@ -9,13 +9,22 @@
 </head>
 
 <body onload="onInit()">
-    <input type="text" oninput="onSearch(event)">
+    <div class="main-layout">
+        <div class="main-header">
+            <h1>WikiTube</h1>
+            <input type="text" oninput="onSearch(event)">
+        </div>
+        <div class="main-container">
 
-    <div class="top-five-yt-results-container"></div>
+            <div class="top-five-yt-results-container"></div>
 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/CGj85pVzRJs" frameborder="0" allowfullscreen></iframe>
+            <iframe class="media-player" width="560" height="315" src="https://www.youtube.com/embed/CGj85pVzRJs" frameborder="0"
+                allowfullscreen></iframe>
 
-    <div class="wiki-container"></div>
+            <div class="wiki-container"></div>
+        </div>
+    </div>
+
 
 
 

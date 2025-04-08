@@ -58,6 +58,7 @@ function onSearch(ev) {
     const srchTxt = ev.target.value
     YT_API_URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${srchTxt}&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8`
     WIKI_API_URL = `https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=${srchTxt}&format=json`
+    if(srchTxt === '' ||srchTxt === undefined) return
     getYouTubeData(YT_API_URL)
         .then(videos => renderYoutube(videos))
         .catch(error => {

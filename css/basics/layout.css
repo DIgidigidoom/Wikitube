@@ -1,0 +1,40 @@
+*> {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: minmax(20px, 1fr) minmax(auto, 1260px) minmax(20px, 1fr);
+}
+
+.main-layout>* {
+    grid-column: 2;
+
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "top-five-yt-results-container media-player "
+        "top-five-yt-results-container wiki-container";
+    gap: 20px;
+}
+
+.top-five-yt-results-container {
+    grid-area: top-five-yt-results-container;
+}
+
+.media-player {
+    grid-area: media-player;
+}
+
+.wiki-container {
+    grid-area: wiki-container;
+}
