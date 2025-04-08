@@ -9,12 +9,11 @@ function getYouTubeData(url) {
 
 
 function prepareData({ results }) {
-    debugger
     return results.items.map(({ snippet, id }) =>
     ({
         title: snippet.title,
         thumbnail: snippet.thumbnails.default.url,
-        url: `https://www.youtube.com/watch?v=${id.videoId}`
+        urlId: id.videoId
     }))
 }
 
