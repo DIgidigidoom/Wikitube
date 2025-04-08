@@ -1,6 +1,6 @@
 'use strict'
-const YT_API_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=beatles&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8'
-const WIKI_API_URL = 'https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=beatles&format=json'
+let YT_API_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=beatles&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8'
+let WIKI_API_URL = 'https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=beatles&format=json'
 
 function onInit() {
     getYouTubeData(YT_API_URL)
@@ -52,4 +52,23 @@ function renderWikiResults(res) {
 function onRenderYoutubePlayer(urlId) {
     const elmediaPlayer = document.querySelector('iframe')
     elmediaPlayer.src = `https://www.youtube.com/embed/${urlId}`
+}
+
+function onSearch(ev) {
+    const srchTxt = ev.target.value
+    YT_API_URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${srchTxt}&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8`
+    WIKI_API_URL = `https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=${srchTxt}&format=json`
+    getYouTubeData(YT_API_URL)
+        .then(videos => renderYoutube(videos))
+        .catch(error => {
+            console.error('Error fetching data:', error)
+            throw error
+        })
+    getWikiData(WIKI_API_URL)
+        .then(results => renderWikiResults(results))
+        .catch(error => {
+            console.error('Error fetching data:', error)
+            throw error
+        })
+
 }
