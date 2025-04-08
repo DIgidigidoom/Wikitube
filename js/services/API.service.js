@@ -6,6 +6,10 @@ function getYouTubeData(url) {
     // .then(res => res.data)
 
 }
+function getWikiData(url) {
+    return axios.get(url)
+        .then(res => res.data)
+}
 
 
 function prepareData({ results }) {

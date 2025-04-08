@@ -1,9 +1,17 @@
 'use strict'
 const YT_API_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=beatles&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8'
+const WIKI_API_URL = 'https://en.wikipedia.org/w/api.php?origin=*&action=query&list=search&srsearch=beatles&format=json'
 
 function onInit() {
     getYouTubeData(YT_API_URL)
         .then(videos => renderYoutube(videos))
+        .catch(error => {
+            console.error('Error fetching data:', error)
+            throw error
+        })
+
+    getWikiData(WIKI_API_URL)
+        .then(results => renderWikiResults(results))
         .catch(error => {
             console.error('Error fetching data:', error)
             throw error
@@ -24,6 +32,21 @@ function renderYoutube(res) {
     })
 
     elYoutubeContainer.innerHTML = strHTML
+}
+
+function renderWikiResults(res) {
+    let strHTML = ''
+    const results = res.query.search
+    console.log(results)
+    const elWikiContainer = document.querySelector('.wiki-container')
+    results.forEach(result => {
+        strHTML += `
+        <div class="wiki-result">
+            <p class="result-title">${result.title}</p>
+            <p class="result-summary">${result.snippet}</p>
+        </div>`
+    })
+    elWikiContainer.innerHTML = strHTML
 }
 
 function onRenderYoutubePlayer(urlId) {
