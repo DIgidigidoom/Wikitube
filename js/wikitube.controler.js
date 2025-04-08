@@ -28,7 +28,7 @@ function renderYoutube(res) {
     res.forEach(video => {
         strHTML += `
         <div class="video-thumbnail" data="${video.urlId}" onclick="onRenderYoutubePlayer('${video.urlId}')">
-            <img class="video_image" src="${video.thumbnail}" alt="">
+            <img class="video-image" src="${video.thumbnail}" alt="">
             <p class="video-title">${video.title}</p>
         </div>`
     })

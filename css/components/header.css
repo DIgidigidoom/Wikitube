@@ -1,0 +1,19 @@
+.logo{
+    height: 80px;
+}
+.account-logo{
+    width: 70px;
+    height: 60px;
+}
+.searc-bar{
+    width: 50%;
+    border-radius: 100px;
+    border: 0.2px solid grey;
+    height: 40px;
+    font-size: 1.2em;
+}
+
+.searc-bar::placeholder{
+    text-indent: 20px
+}
+  

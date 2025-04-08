@@ -1,0 +1,12 @@
+.video-thumbnail{
+    border: 0.1px solid lightgrey;
+    border-radius: 6px;
+    padding: 10px;
+}
+.video-image{
+    border-radius: 6px
+}
+.video-title{
+    margin-block: 5px;
+    font-size: 1.2em;
+}

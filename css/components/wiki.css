@@ -1,0 +1,20 @@
+.wiki-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.wiki-result{
+    padding: 10px;
+}
+.result-title{
+    margin-block: 0px;
+    font-size: 2em;
+    font-weight: 600;
+    text-decoration: underline;
+
+}
+
+.result-summary{
+    margin-block: 5px;
+    font-size: 1.3em;
+}
