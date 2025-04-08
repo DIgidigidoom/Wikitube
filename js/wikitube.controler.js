@@ -1,8 +1,7 @@
 'use strict'
-const YT_API_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=beatles&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8'
+const YT_API_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=beatles&maxResults=5&key=AIzaSyBc-QFw-FOHqiesLtRz1hXTJ5MpOwdMya8'
 
 function onInit() {
-    debugger
     getYouTubeData(YT_API_URL)
         .then(videos=>renderYoutube(videos))
         .catch(error => {
